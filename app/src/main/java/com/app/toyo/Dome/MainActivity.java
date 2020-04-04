@@ -1,17 +1,20 @@
 package com.app.toyo.Dome;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
-    //vjhzNjkzbjkkjhkhkjhkjkjjh
 
     RecyclerView recyclerView;
     Vector<YouTubeVideos> youtubeVideos = new Vector<YouTubeVideos>();
+    ImageView settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +22,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        settings=(ImageView)findViewById(R.id.settings);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
-
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(MainActivity.this,Settings.class);
+                startActivity(i);
+            }
+        });
         youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/lWtEin3-ryE\" frameborder=\"0\" allowfullscreen></iframe>") );
         youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/ZQPm2CjejVg\" frameborder=\"0\" allowfullscreen></iframe>") );
         youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/4guxbO4c3uw\" frameborder=\"0\" allowfullscreen></iframe>") );
@@ -32,12 +42,6 @@ public class MainActivity extends AppCompatActivity {
         youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/ggISrFwe3KE\" frameborder=\"0\" allowfullscreen></iframe>") );
         youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/SLD9xzJ4oeU\" frameborder=\"0\" allowfullscreen></iframe>") );
         youtubeVideos.add( new YouTubeVideos("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/YRAImdAcl5g\" frameborder=\"0\" allowfullscreen></iframe>") );
-
-
-
-
-
-
         VideoAdapter videoAdapter = new VideoAdapter(youtubeVideos);
 
         recyclerView.setAdapter(videoAdapter);
